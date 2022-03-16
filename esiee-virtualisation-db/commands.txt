@@ -1,0 +1,16 @@
+kubectl apply -f mysql-secret.yaml
+kubectl apply -f mysql-storage.yaml
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f mysql-serviceNodePort.yaml
+kubectl get pods
+<récuperer le pods de mysql ici>
+kubectl exec --stdin --tty <pods récupéré> -- mysql -ptest1234
+
+Dans le mySQL :
+>create database db_project;
+>create user 'admin' identified by 'test1234';
+>grant all on db_example.* to 'admin';
+>exit
+
+minikube service mysql --url
+<Récupérer l'URL du mySQL et l'utiliser dans le projet JAVA>
