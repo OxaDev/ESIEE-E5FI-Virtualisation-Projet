@@ -9,7 +9,7 @@ kubectl exec --stdin --tty <pods récupéré> -- mysql -ptest1234
 Dans le mySQL :
 >create database db_project;
 >create user 'admin' identified by 'test1234';
->grant all on db_example.* to 'admin';
+>grant all on db_project.* to 'admin';
 >exit
 
 minikube service mysql --url
