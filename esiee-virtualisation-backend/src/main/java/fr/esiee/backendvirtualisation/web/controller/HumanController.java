@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.*;
 import fr.esiee.backendvirtualisation.model.*;
 
 @RestController
+
 public class HumanController {
 	
-	String urlDB = "jdbc:mysql://127.0.0.1:50287/db_project";
+	String urlDB = "jdbc:mysql://127.0.0.1:60247/db_project";
 	String myDriver = "org.gjt.mm.mysql.Driver";
-    String idDB = "admin";
-    String MdPDB = "test1234";
+    String idDB = "admin2";
+    String MdPDB = "admin2";
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/AllHumans")
    public ArrayList<Human> listeProduits() {
 		ArrayList<Human> listReturn = new ArrayList<Human>();
@@ -75,6 +77,7 @@ public class HumanController {
 	    }
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/FillDB")
 	public void fillDB() {
 		try
@@ -98,13 +101,14 @@ public class HumanController {
 	    }
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/ClearDB")
 	public void clearDB() {
 		try
 	    {
 	      String myDriver = "org.gjt.mm.mysql.Driver";
 	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(urlDB, "admin", "test1234");
+	      Connection conn = DriverManager.getConnection(urlDB, idDB, MdPDB);
 	      
 	      String query = "TRUNCATE TABLE HUMANS;";
 
@@ -119,13 +123,14 @@ public class HumanController {
 	    }
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/DeleteDB")
 	public void deleteDB() {
 		try
 	    {
 	      String myDriver = "org.gjt.mm.mysql.Driver";
 	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(urlDB, "admin", "test1234");
+	      Connection conn = DriverManager.getConnection(urlDB, idDB, MdPDB);
 	      
 	      String query = "DROP TABLE HUMANS;";
 
@@ -140,8 +145,10 @@ public class HumanController {
 	    }
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/Human/{id}")
 	public Human afficherUnHumain(@PathVariable int id) {
+		System.out.println("fzkengrfb");
 		Human temp_Human = new Human(0,"error", "error","JeTeDisQueCestUneErreurDUKON@gmail.com");
 		try
 	    {
@@ -176,6 +183,7 @@ public class HumanController {
 		return temp_Human;
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@DeleteMapping("/Human/{id}")
 	public void supprimerUnHumain(@PathVariable int id) {
 		try
@@ -196,6 +204,7 @@ public class HumanController {
 	    }
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(value = "/AddHuman")
 	public void ajouterHumain(@RequestBody Human pHuman) {
 		try
@@ -217,6 +226,7 @@ public class HumanController {
 	    }
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(value = "/ModifyHuman")
 	public void modifierHumain(@RequestBody Human pHuman) {
 		try
