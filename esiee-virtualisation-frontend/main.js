@@ -2,6 +2,8 @@ var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append('Access-Control-Allow-Origin', '*');
 
+var url_API = "http://back-end-service.default.svc.cluster.local:80/"
+
 allPeople();
 
 function addPeople() {
@@ -23,14 +25,14 @@ function addPeople() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:9090/AddHuman", requestOptions)
+    fetch(url_API+"/AddHuman", requestOptions)
         .then(response => { response.text(); allPeople(); })
         .catch(error => console.log('error', error));
 
 }
 
 function deletePeople(id) {
-    var urlDelete = "http://localhost:9090/Human/" + id.toString();
+    var urlDelete = url_API+"Human/" + id.toString();
 
     var requestOptions = {
         method: 'DELETE',
@@ -44,7 +46,7 @@ function deletePeople(id) {
 }
 
 function getThisPeople(id) {
-    var urlGetThis = "http://localhost:9090/Human/" + id;
+    var urlGetThis = url_API+"Human/" + id;
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
@@ -66,7 +68,6 @@ function editPeople(id) {
 }
 
 function saveEditPeople() {
-    console.log("alors");
     var idP = document.getElementById("idModalEdit").value;
     var nomP = document.getElementById("nomEdit").value;
     var prenomP = document.getElementById("prenomEdit").value;
@@ -86,7 +87,7 @@ function saveEditPeople() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:9090/ModifyHuman", requestOptions)
+    fetch(url_API+"ModifyHuman", requestOptions)
         .then(response => { response.text(); allPeople(); })
         .catch(error => console.log('error', error));
 
@@ -99,7 +100,7 @@ function allPeople() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:9090/AllHumans", requestOptions)
+    fetch(url_API+"AllHumans", requestOptions)
         .then(response => response.text())
         .then(function (result) {
             displayPeople(result);

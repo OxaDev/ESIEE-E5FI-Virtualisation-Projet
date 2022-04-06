@@ -10,10 +10,10 @@ import fr.esiee.backendvirtualisation.model.*;
 
 public class HumanController {
 	
-	String urlDB = "jdbc:mysql://127.0.0.1:60247/db_project";
+	String urlDB = "jdbc:mysql://mysql.default.svc.cluster.local:3306/db_project";
 	String myDriver = "org.gjt.mm.mysql.Driver";
-    String idDB = "admin2";
-    String MdPDB = "admin2";
+    String idDB = "api";
+    String MdPDB = "api";
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/AllHumans")
