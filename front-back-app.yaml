@@ -1,3 +1,4 @@
+# Front Deployment 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,7 +17,7 @@ spec:
           image: oxasa/front-end-image:latest
           
 ---
-
+# Back Deployment 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,7 +38,7 @@ spec:
           imagePullPolicy: Always
           
 ---
-
+# Front Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -47,10 +48,12 @@ spec:
     - name: http
       targetPort: 80
       port: 80
+      nodePort: 32500
+  type: NodePort
   selector:
     app: front-end
 ---
-
+# Back Deployment 
 apiVersion: v1
 kind: Service
 metadata:
@@ -61,11 +64,12 @@ spec:
       protocol : TCP
       targetPort: 9090
       port: 80
-  type: ClusterIP
+      nodePort: 32000
+  type: NodePort
   selector:
     app: back-end
 ---
-
+# MySQL Deployment 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -102,7 +106,7 @@ spec:
           claimName: mysql-pv-claim
 
 ---
-
+# MySQL secret 
 apiVersion: v1
 kind: Secret
 metadata:
@@ -112,7 +116,7 @@ stringData:
   password: test1234
   
 ---
-
+# MySQL Service 
 apiVersion: v1
 kind: Service
 metadata:
@@ -124,7 +128,7 @@ spec:
     app: mysql
 
 ---
-
+# MySQL PersistentVolume 
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -140,6 +144,7 @@ spec:
   hostPath:
     path: "/mnt/data"
 ---
+# MySQL PersistentVolumeClaim
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

@@ -3,7 +3,7 @@ myHeaders.append("Content-Type", "application/json");
 myHeaders.append('Access-Control-Allow-Origin', '*');
 
 var url_API = "http://back-end-service.default.svc.cluster.local:80/"
-
+url_API = "http://localhost:32000/"
 allPeople();
 
 function addPeople() {
